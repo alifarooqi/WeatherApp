@@ -1,0 +1,242 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
+.App{
+    position: relative;
+    width: 414px;
+    height: 696px;
+    margin: 10px auto;
+    background-image: url('./img/bg.jpg');
+    text-align: center;
+    font-family: 'Indie Flower', cursive;
+}
+.topnav{
+    position: absolute;
+    top: 0;
+    width: 384px;
+    padding: 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.sidenavIcon{
+    height: 25px;
+    width: 25px;
+}
+
+.changeLoc{
+    float: right;
+    border-radius: 10px;
+    border: solid rgb(0,60,120) 1px;
+    padding: 5px;
+    background: none;
+    width: 100px;
+    cursor: pointer;
+    -webkit-transition: width 0.5s;
+    -moz-transition: width 0.5s;
+    -o-transition: width 0.5s;
+    transition: width 0.5s;
+    position: relative;
+    z-index: 10;
+}
+.changeLoc:hover{
+    background: rgba(0,93,183, 0.9);
+
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #333;
+    opacity: 1; /* Firefox */
+    font-style: italic;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+.changeLoc:focus{
+    width: 300px;
+    padding-left: 20px;
+    background: white;
+}
+.searchResults{
+    width: 325px;
+    background: white;
+    position: relative;
+    top: -18px;
+    left: 58px;
+    padding-top: 15px;
+    z-index: 5;
+    max-height: 190px;
+    overflow-y: auto;
+    display: none;
+}
+.result, .noResult{
+    margin: 0;
+    padding: 5px 10px;
+    border-bottom: solid 1px #555;
+}
+.noResult{
+    color: red;
+    font-style: italic;
+}
+.result:hover{
+    background: #818181;
+    cursor: pointer;
+}
+
+.sidenav {
+    height: 636px;
+    width: 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,93,183, 0.95);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    box-shadow: 184px 0 rgba(0,0,0,0.5);
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.main{
+    padding-top: 40px;
+}
+
+.box{
+    width: 90%;
+    margin: auto;
+    border-radius: 10px;
+    background: rgba(200,200,200,0.8);
+    padding-bottom: 1px;
+}
+
+.location{
+    font-size: 56px;
+    text-shadow: 2px 1px 5px #add4dd;
+    margin-bottom: 0px;
+}
+
+.date{
+    font-size: 24px;
+    margin: -20px 0 15px 0;
+    text-align: center;
+}
+
+.temperature{
+    font-size: 30px;
+    line-height: 40px;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.weatherIcon{
+    vertical-align: middle;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    top: -6px;
+}
+
+.temperature sup{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.cond{
+    margin: 0;
+    font-size: 40px;
+}
+
+.rain{
+    margin: 0;
+    font-size: 26px;
+    text-align: left;
+    margin-left: 20px;
+}
+
+.rain span{
+    margin-left: 60px;
+}
+
+.other{
+    font-size: 20px;
+    margin: 5px 20px;
+    text-align: left;
+}
+
+.prediction{
+    margin: 30px auto;
+    width: 90%;
+}
+
+.predictionTitle{
+    text-align: left;
+    margin: 0;
+    background: rgba(200,200,200,0.8);
+    border-radius: 10px 10px 0 0;
+    padding-left: 10px;
+    padding-bottom: 2px;
+}
+
+.verticalScroll{
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.hourly{
+    border: solid 1px #e0ddb3;
+    display: inline-block;
+    background: rgba(200,200,200,0.5);
+    margin: 0;
+    padding: 5px;
+    padding-bottom: 0;
+}
+
+.hourly p{
+    margin:0;
+    font-size: 16px;
+    line-height: 16px;
+}
+.hourly p .time{
+    font-size: 26px;
+    line-height: 26px;
+    font-weight: 700;
+}
+.hourly p .temp{
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.hourly .weatherIcon2{
+    height: 30px;
+    width: 30px;
+}
+
+.main2{
+    padding-top: 300px;
+}
