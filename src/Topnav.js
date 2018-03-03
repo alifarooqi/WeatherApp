@@ -7,10 +7,10 @@ export default class Topnav extends Component {
         super(props);
         this.state = {
             querry: "",
-            displayResults: false,
             resultsName: [],
             resultsZMW: []
         }
+        this.changeLocTO = this.changeLocTO.bind(this);
     }
 
     openNav() {
@@ -35,7 +35,7 @@ export default class Topnav extends Component {
             var zmws = [];
             for (var i = 0; i < parsed_json['RESULTS'].length; i++) {
                 //TODO Add onClick function!
-                names.push(<h3 className="result" id={i} key={i} onClick={this.changeLocTO(i)}>{parsed_json['RESULTS'][i]["name"]}</h3>);
+                names.push(<h3 className="result" id={i} key={i} onClick={this.changeLocTO}>{parsed_json['RESULTS'][i]["name"]}</h3>);
                 zmws.push(parsed_json['RESULTS'][i]["zmw"]);
             }
             this.setState({
@@ -51,15 +51,15 @@ export default class Topnav extends Component {
         $(".searchResults").slideDown();
     }
 
-    changeLocTO(i){
+    changeLocTO(e){
+        var i = e.target.id;
         this.props.changeTo(this.state.resultsZMW[i]);
+        this.setState({querry: ""})
     }
 
     search = () => {
         setTimeout(function(){
-            console.log("Searching...");
             var querry = document.getElementById("searchbox").value;
-            console.log(querry);
             if (querry.length>0 && querry != this.state.querry) {
                 this.setState({querry: querry});
                 this.fetchLocation(querry);
@@ -67,7 +67,7 @@ export default class Topnav extends Component {
             else if (querry.length==0) {
                 $(".searchResults").slideUp();
             }
-        }.bind(this),3000);
+        }.bind(this),1000);
     }
 
         render() {

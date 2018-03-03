@@ -9,7 +9,7 @@
     margin: 10px auto;
     background-image: url('./img/bg.jpg');
     text-align: center;
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Comfortaa';
 }
 .topnav{
     position: absolute;
@@ -132,23 +132,23 @@
     margin: auto;
     border-radius: 10px;
     background: rgba(200,200,200,0.8);
-    padding-bottom: 1px;
+    padding: 10px 0;
+    margin-top: 50px;
 }
 
 .location{
-    font-size: 56px;
-    text-shadow: 2px 1px 5px #add4dd;
-    margin-bottom: 0px;
+    font-size: 50px;
+    margin: 0px;
 }
 
 .date{
-    font-size: 24px;
-    margin: -20px 0 15px 0;
+    font-size: 22px;
+    margin: -10px 0 15px 0;
     text-align: center;
 }
 
 .temperature{
-    font-size: 30px;
+    font-size: 36px;
     line-height: 40px;
     vertical-align: middle;
     margin: 0;
@@ -163,30 +163,32 @@
 }
 
 .temperature sup{
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
 }
 
 .cond{
     margin: 0;
-    font-size: 40px;
+    font-size: 26px;
 }
 
 .rain{
     margin: 0;
-    font-size: 26px;
+    margin-top: 30px;
+    font-size: 20px;
     text-align: left;
     margin-left: 20px;
 }
 
 .rain span{
-    margin-left: 60px;
+    margin-left: 58px;
 }
 
 .other{
-    font-size: 20px;
+    font-size: 16px;
     margin: 5px 20px;
     text-align: left;
+    line-height: 24px;
 }
 
 .prediction{
@@ -199,8 +201,7 @@
     margin: 0;
     background: rgba(200,200,200,0.8);
     border-radius: 10px 10px 0 0;
-    padding-left: 10px;
-    padding-bottom: 2px;
+    padding: 5px 10px;
 }
 
 .verticalScroll{
@@ -215,20 +216,21 @@
     margin: 0;
     padding: 5px;
     padding-bottom: 0;
+    min-width: 81px;
 }
 
 .hourly p{
     margin:0;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 16px;
 }
 .hourly p .time{
-    font-size: 26px;
+    font-size: 22px;
     line-height: 26px;
     font-weight: 700;
 }
 .hourly p .temp{
-    font-size: 20px;
+    font-size: 18px;
     line-height: 20px;
 }
 
@@ -239,4 +241,9 @@
 
 .main2{
     padding-top: 300px;
+}
+
+.loadingDaily{
+    position: relative;
+    top: 40px;
 }
