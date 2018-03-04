@@ -1,14 +1,14 @@
 ## Installation
   1. Goto the directory in which you've pulled (or downloaded) the code.
   2. Install react using the following command
-    npm install react
+      npm install react
   3. Install jquerry using the following command (if you haven't already)
-    npm install jquery
-  4. Start server
-    npm start
+      npm install jquery
+  4. Install Loading animation: 
+      npm i react-loading-animation
+  5. Start server
+      npm start
     
-  If there's any problem then may God and the internet help you, because I can't! :)
-
 
 
 
