@@ -1,14 +1,15 @@
-## Installation
+# Installation
   1. Goto the directory in which you've pulled (or downloaded) the code.
-  2. Install react using the following command: **npm install react**
-  3. Install jquerry using the following command (if you haven't already): **npm install jquery**
+  2. Install react using the following command: **npm install react**
+  3. Install jquerry using the following command (if you haven't already): **npm install jquery**
   4. Install Loading animation: **npm i react-loading-animation**
   5. Start server: **npm start**
+  6. If change location function does not work on your browser, use Chrome and install this extension: **https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi?hl=en**
     
 
 
 
-
+# Other bs
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
