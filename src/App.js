@@ -3,33 +3,35 @@ import Topnav from './Topnav';
 import Sidenav from './Sidenav';
 import Hourly from './Hourly';
 import Daily from './Daily';
+import MySports from './MySports';
 import './App.css';
 import $ from 'jquery';
 
 class App extends Component {
     constructor(props){
         super(props);
+        /*this.fetchWeatherData();*/
         this.state = {
             city: "London",
             zmw: "00000.40.03779",
-            temp: "",
-            cond: "",
-            icon: "",
-            iconURL: "",
+            temp: "5",
+            cond: "Cloudy",
+            icon: "nt_partlycloudy",
+            iconURL: "http://icons.wxug.com/i/c/k/nt_partlycloudy.gif",
             unit: 'C',
-            feelslike: "",
-            rainToday: "",
-            rainHour: "",
-            visibility: "",
-            windString: "",
-            windSpeed: "",
+            feelslike: "4",
+            rainToday: "5",
+            rainHour: "0",
+            visibility: "12",
+            windString: "Calm",
+            windSpeed: "3",
             prediction: "hourly",
             loading: true
         }
         this.changeUnit = this.changeUnit.bind(this);
         this.displayDaily = this.displayDaily.bind(this);
         this.displayWeekly = this.displayWeekly.bind(this);
-        this.changeLocation = this.changeLocation.bind(this);
+        this.displayMySports = this.displayMySports.bind(this);
         this.fetchWeatherData();
     }
 
@@ -43,8 +45,13 @@ class App extends Component {
         this.setState({prediction: "weekly"});
         this.closeNav();
     }
+    displayMySports(e) {
+        e.preventDefault();
+        this.closeNav();
+    }
 
     fetchWeatherData = () => {
+        // API URL with a structure of : ttp://api.wunderground.com/api/key/feature/q/country-code/city.json
         var url = "http://api.wunderground.com/api/4997088816c2242e/conditions/q/zmw:"+ this.state.zmw+".json";
         $.ajax({
             url: url,
@@ -75,13 +82,9 @@ class App extends Component {
         document.getElementById("mySidenav").style.width = "0";
     }
 
-    changeLocation = (zmw) => {
-        this.setState({
-            zmw: zmw,
-            loading: true
-        }, this.fetchWeatherData);
-        $(".searchResults").slideUp(500);
-        $("#searchbox").val("");
+    changeLocation(zmw){
+        this.setState({zmw: zmw});
+        this.fetchWeatherData;
     }
 
   render() {
@@ -92,10 +95,10 @@ class App extends Component {
       }
       let prediction;
       if (this.state.prediction == "hourly"){
-        prediction = <Hourly unit={this.state.unit} zmw={this.state.zmw}/>
+        prediction = <Hourly temp={this.state.temp} unit={this.state.unit} rain={this.state.rainHour} icon={this.state.icon} />
       }
       else{
-        prediction = <Daily unit={this.state.unit} zmw={this.state.zmw} />
+        prediction = <Daily temp={this.state.temp} unit={this.state.unit} rain={this.state.rainHour} icon={this.state.icon} />
       }
       var d = new Date();
       d = d.toDateString();
@@ -125,7 +128,7 @@ class App extends Component {
                 <p className="other">
                   <b>Feels like:</b> {this.state.feelslike} &deg;{this.state.unit}<br/>
                   <b>Visibility:</b> {this.state.visibility} km<br/>
-                    <b>Wind:</b><span className="wind"> {this.state.windString} ({this.state.windSpeed} kmph)</span>
+                  <b>Wind:</b> {this.state.windString} ({this.state.windSpeed} kmph)
                 </p>
               </div>
                 {prediction}
@@ -133,9 +136,12 @@ class App extends Component {
         );
       }
 
-      $(document).mouseup(function(e) {
+      $(document).mouseup(function(e)
+      {
           var container = $("#mySidenav");
-          if (!container.is(e.target) && container.has(e.target).length === 0 && e.target.nodeName != "IMG") {
+          // if the target of the click isn't the container nor a descendant of the container
+          if (!container.is(e.target) && container.has(e.target).length === 0 && e.target.nodeName != "IMG")
+          {
               document.getElementById("mySidenav").style.width = "0";
           }
       });
@@ -143,13 +149,14 @@ class App extends Component {
     return (
       <div className="App" ref="myRef">
         <Topnav changeTo={this.changeLocation}/>
-        <Sidenav daily={this.displayDaily} weekly={this.displayWeekly} />
+        <Sidenav daily={this.displayDaily} weekly={this.displayWeekly} mysports={this.displayMySports}/>
           {main}
       </div>
     );
   }
 
     parseResponse = (parsed_json) => {
+        //TODO Top two to be changed when change location occurs
         var city = parsed_json['current_observation']['display_location']['city'];
         var temp_c = parsed_json['current_observation']['temp_c'];
         var temp_f = parsed_json['current_observation']['temp_f'];
