@@ -6,12 +6,14 @@ export default class Daily extends Component {
         super(props);
         this.fetchWeatherData = this.fetchWeatherData.bind(this);
         this.parseResponse = this.parseResponse.bind(this);
-        this.fetchWeatherData();
         this.state = {
             forecast: [],
             loading: true,
-            unit: this.props.unit
+            unit: this.props.unit,
+            mySports: this.props.mySports,
+            sportsConditions: this.props.sportsConditions
         }
+        this.fetchWeatherData();
     }
 
     fetchWeatherData = () => {
@@ -24,7 +26,31 @@ export default class Daily extends Component {
         });
     }
 
+    scrollLeft(){
+        var leftPos = $('.verticalScroll').scrollLeft();
+        $(".verticalScroll").animate({scrollLeft: leftPos - 93}, 500);
+        console.log("Scrolling left");
+    }
+    scrollRight(){
+        var leftPos = $('.verticalScroll').scrollLeft();
+        $(".verticalScroll").animate({scrollLeft: leftPos + 93}, 500);
+        console.log("Scrolling right");
+    }
+
     render() {
+        //See if the unit has changed
+        if (this.state.unit != this.props.unit){
+            this.setState({unit: this.props.unit});
+            this.fetchWeatherData();
+        }
+        //Check if My Sports has been updated
+        if (this.state.mySports != this.props.mySports){
+            this.setState({
+                mySports: this.props.mySports,
+                sportsConditions: this.props.sportsConditions
+            }, this.fetchWeatherData);
+        }
+        //Check if the data has parsed successfully
         if(this.state.loading){
             const Loading = require('react-loading-animation');
             return (
@@ -36,7 +62,9 @@ export default class Daily extends Component {
         }
         return (
             <div className="prediction">
-                <h3 className="predictionTitle">Weekly Weather</h3>
+                <h3 className="predictionTitle">Weekly Weather <span className="changePrediction" onClick={this.props.change}>Hourly Weather</span></h3>
+                <div className="leftArrow" onClick={this.scrollLeft}><i className="fas fa-chevron-circle-left"></i></div>
+                <div className="rightArrow" onClick={this.scrollRight}><i className="fas fa-chevron-circle-right"></i></div>
                 <div className="verticalScroll">
                     {this.state.forecast}
                 </div>
@@ -48,13 +76,36 @@ export default class Daily extends Component {
         var data = parsed_json.forecast.simpleforecast.forecastday;
         var forecast = [];
         var unit = this.state.unit == 'C'? "celsius" : "fahrenheit";
+        var backgroundColor = {};
+
         for (var i=1; i<data.length; i++){
+            //Check for the sports
+            if (this.state.mySports != null){
+                var cond = this.state.sportsConditions[this.state.mySports];
+                var properties = Object.getOwnPropertyNames(cond);
+                var propertiesTranslated = ["qpf_allday", "snow_allday"];
+                var canPlay = true;
+                for (var j=0; j<properties.length-1 && canPlay; j++){
+                    var currentCond = parseFloat(data[i][propertiesTranslated[j]]["cm"]);
+                    if (currentCond < cond[properties[j]][0] || currentCond > cond[properties[j]][1]){ //If current condition lies outside the normal range of the sports.
+                        canPlay = false;
+                        break;
+                    }
+                }
+                if (canPlay){
+                    backgroundColor = {backgroundColor: 'rgba(0, 132, 79,0.6)', color: 'white'};
+                }
+                else{
+                    backgroundColor = {backgroundColor: 'rgba(260,0,0,0.6)', color: 'white'};
+                }
+            }
+
+
             const temp = (
-                <div className="hourly" key={i}>
+                <div className="hourly" key={i} style={backgroundColor}>
                     <p>
                         <span className="time"> {data[i].date.weekday_short}</span><br/>
                         <span className="temp">{data[i].high[unit]} &deg;{this.state.unit}</span><br/>
-                        Rain: {data[i].qpf_allday.mm} mm
                     </p>
                     <img src={data[i].icon_url} className="weatherIcon2" alt={data[i].icon} title={data[i].conditions} />
                 </div>

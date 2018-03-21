@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SelectSports from './SelectSports';
 import './App.css';
 import $ from 'jquery';
 
@@ -11,10 +12,7 @@ export default class Topnav extends Component {
             resultsZMW: []
         }
         this.changeLocTO = this.changeLocTO.bind(this);
-    }
-
-    openNav() {
-        document.getElementById("mySidenav").style.width = "230px";
+        this.changeSports = this.changeSports.bind(this);
     }
 
     fetchLocation = (querry) => {
@@ -57,6 +55,20 @@ export default class Topnav extends Component {
         this.setState({querry: ""})
     }
 
+    changeSports(sports){
+        this.props.changeSports(sports);
+        //Added Animation to confirm change
+        $('html, body').animate({
+            scrollTop: $(".prediction").offset().top
+        }, 1500);
+        for (var iter = 0; iter < 4 ; iter++) {
+            $(".prediction").animate({
+                left: ((iter % 2 == 0 ? 10 : -10))
+            }, 100);
+        }
+        $(".prediction").animate({ left: 0 }, 100);
+    }
+
     search = () => {
         setTimeout(function(){
             var querry = document.getElementById("searchbox").value;
@@ -73,8 +85,8 @@ export default class Topnav extends Component {
         render() {
         return (
             <div className="topnav">
-                <img src={require("./img/Hamburger_icon.svg")} className="sidenavIcon" onClick={this.openNav} id="sidenavOpener"/>
-                <input className="changeLoc" placeholder="Change Location" onKeyUp={this.search} id="searchbox"/>
+                <SelectSports changeSports={this.changeSports}/>
+                <input className="changeLoc" placeholder= "Change Location" onKeyUp={this.search} id="searchbox"/>
                 <div className="searchResults">
                     {this.state.resultsName}
                 </div>
