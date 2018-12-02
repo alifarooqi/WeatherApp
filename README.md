@@ -1,3 +1,7 @@
+# Description
+
+A weather app (mobile version) made specifically for athletes to check if the weather is suitable for them to play their favourite sport. This app was made using ReactJS, only for mobile screen interface for a university project.
+
 # Installation
   1. Goto the directory in which you've pulled (or downloaded) the code.
   2. Install react using the following command: **npm install react**
@@ -9,7 +13,7 @@
 
 
 
-# Other bs
+# Other
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
